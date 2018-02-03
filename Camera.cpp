@@ -21,7 +21,7 @@ Camera::~Camera()
 
 glm::mat4 Camera::Update()
 {
-    projection = glm::perspective(45.0f, mDisplay->Width / mDisplay->Height , 0.1f , 100.0f);
+    projection = glm::infinitePerspective(45.0f, mDisplay->Width / mDisplay->Height , 0.1f);
     mYaw = mSensetivity * mDisplay->RelMotionX() + mYaw;
     mPitch = mSensetivity * mDisplay->RelMotionY() + mPitch;
     if( mPitch < -89){

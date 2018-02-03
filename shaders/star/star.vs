@@ -9,7 +9,7 @@ uniform mat4 projection;
 
 void main()
 {
-    vec3 realposition = position.xyz * 10;
+    vec3 realposition = position.xyz;
     gl_Position =  projection * view * model* vec4(realposition,1.0f);
     float absoluteSize = pow(10,(size/-5))*10;
     if(absoluteSize<2){

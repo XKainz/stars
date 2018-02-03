@@ -10,7 +10,7 @@ const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
 
 int main(int argc,char* agrs[])
 {
-    /*
+    //*
     Display display(1500,800,"The star constellations of Ovid");
 
     Camera camera(&display,0.1f);
@@ -20,7 +20,7 @@ int main(int argc,char* agrs[])
     Shader linesShader;
     linesShader.Shader_init("../shaders/lines/lines.vs","../shaders/lines/lines.fs");
 
-    Star stars(&camera,"../hygdata_v3programm.bin",pointsShader.Shader_id(),"../hygdata_v3ebo.bin",linesShader.Shader_id());
+    Star stars(&camera,"../hygdata_v3/hygdata_v3magspecxyz.csv",pointsShader.Shader_id(),"../hygdata_v3ebo.bin",linesShader.Shader_id());
     Cube cube(&camera);
 
     LTimer timer;
@@ -35,7 +35,7 @@ int main(int argc,char* agrs[])
             camera.Update();
 
             stars.DrawPoints();
-            stars.DrawLines();
+            //stars.DrawLines();
 
 
             display.Update();
@@ -46,8 +46,8 @@ int main(int argc,char* agrs[])
             }
     }
     //*/
-    //*/
-    std::vector<float> stars = readCSVFileVBO("../hygdata_v3/hygdata_v3cutDown.csv",';');
+    /*/
+    std::vector<float> stars = readCSVFileVBO("../hygdata_v3/hygdata_v3magspecxyz.csv",';');
     for(int i(0); i < stars.size(); i++){
         std::cout << stars[i] << std::endl;
     }

@@ -4,26 +4,29 @@ Star::Star(Camera* camera, const char* fPoints, GLuint pointsShader, const char*
 
     mPointsShader = pointsShader;
     mLinesShader = linesShader;
-    mPointsSize = readSize(fPoints);
     mLinesSize = readSize(fLines);
 
-    const float* points = readBinaryFileVBO(fPoints);
+    std::vector<float> points;
+    points = readCSVFileVBO(fPoints, ';');
     const unsigned int* lines = readBinaryFileEBO(fLines);
+    mPointsSize = points.size()* sizeof(float);
 
     glCreateVertexArrays(1,&mPointsAO);
     glBindVertexArray(mPointsAO); //VAO Binded
 
         glGenBuffers(1,&mVBO);
         glBindBuffer(GL_ARRAY_BUFFER,mVBO);
-        glBufferData(GL_ARRAY_BUFFER,mPointsSize,points,GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER,mPointsSize,&points.front(),GL_STATIC_DRAW);
 
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(2*sizeof(GLfloat)));
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(2*sizeof(float)));
         glEnableVertexAttribArray(0);
 
-        glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), 0 );
+        glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0 );
         glEnableVertexAttribArray(1);
 
     glBindVertexArray(0);
+
+
 
     glCreateVertexArrays(1,&mLinesAO);
     glBindVertexArray(mLinesAO);
@@ -42,8 +45,7 @@ Star::Star(Camera* camera, const char* fPoints, GLuint pointsShader, const char*
     glBindVertexArray(0);
     delete[] lines;
     lines = NULL;
-    delete[] points;
-    points = NULL;
+
 
     glEnable(GL_PROGRAM_POINT_SIZE);
     glEnable(GL_LINE_SMOOTH);

@@ -3,12 +3,14 @@
 #include "Timer.h"
 #include "Star.h"
 #include "Cube.h"
+#include "BinFiles.h"
 
 const int SCREEN_FPS = 60;
 const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
 
 int main(int argc,char* agrs[])
 {
+    /*
     Display display(1500,800,"The star constellations of Ovid");
 
     Camera camera(&display,0.1f);
@@ -43,7 +45,13 @@ int main(int argc,char* agrs[])
                     SDL_Delay( SCREEN_TICKS_PER_FRAME - frameTicks );
             }
     }
-
+    //*/
+    //*/
+    const float* stars(readCSVFileVBO("../hygdata_v3/hygdata_v3cutDown.csv",';'));
+    for(int i(0); i < 10000; i++){
+        std::cout << stars[i] << std::endl;
+    }
+    //*/
     return 0;
 }
 

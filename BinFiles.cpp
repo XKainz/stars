@@ -1,10 +1,9 @@
 #include "BinFiles.h"
-
-void makeBinaryFileVBO(const char* in, char seperator,const char* out){
+unsigned int getCellNumber(const char* in, char seperator) {
     std::fstream fileIn(in,std::ios::in);
     std::string value;
     const char* cvalue;
-    unsigned int lengthArray =0;
+    unsigned int lengthArray(0);
     while(fileIn.good()){
         if(fileIn.get()==seperator){
             lengthArray++;
@@ -12,9 +11,37 @@ void makeBinaryFileVBO(const char* in, char seperator,const char* out){
     }
     fileIn.clear();
     fileIn.seekg(0,std::ios::beg);
+    fileIn.close();
 
+    return lengthArray;
+}
+
+const float* readCSVFileVBO(const char* in, char seperator)
+{
+    unsigned int lengthArray(getCellNumber(in, seperator));
+
+    std::fstream fileIn(in,std::ios::in);
     unsigned int i = 0;
     float* array= new float[lengthArray];
+    const char* cvalue;
+    std::string value;
+    while( i<lengthArray){
+        getline(fileIn,value,seperator);
+        cvalue = value.c_str();
+        array[i] = atof(cvalue);
+        i++;
+    }
+    return array;
+}
+
+void makeBinaryFileVBO(const char* in, char seperator,const char* out){
+    unsigned int lengthArray(getCellNumber(in, seperator));
+
+    std::fstream fileIn(in,std::ios::in);
+    unsigned int i = 0;
+    float* array= new float[lengthArray];
+    const char* cvalue;
+    std::string value;
     while( i<lengthArray){
         getline(fileIn,value,seperator);
         cvalue = value.c_str();

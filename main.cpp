@@ -47,8 +47,8 @@ int main(int argc,char* agrs[])
     }
     //*/
     //*/
-    const float* stars(readCSVFileVBO("../hygdata_v3/hygdata_v3cutDown.csv",';'));
-    for(int i(0); i < 10000; i++){
+    std::vector<float> stars = readCSVFileVBO("../hygdata_v3/hygdata_v3cutDown.csv",';');
+    for(int i(0); i < stars.size(); i++){
         std::cout << stars[i] << std::endl;
     }
     //*/

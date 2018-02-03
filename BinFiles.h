@@ -4,10 +4,11 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
+#include <vector>
 
 unsigned int getCellNumber(const char* in, char seperator);
-const float* readCSVFileVBO(const char* in, char seperator);
-void makeBinaryFile(const char* in, char seperator,const char* out);
+const std::vector<float> readCSVFileVBO(const char* in, char seperator);
+void makeBinaryFileVBO(const char* in, char seperator,const char* out);
 const float* readBinaryFileVBO(const char* in);
 unsigned int readSize( const char* in);
 const unsigned int* readBinaryFileEBO(const char* in);

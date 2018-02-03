@@ -16,13 +16,13 @@ unsigned int getCellNumber(const char* in, char seperator) {
     return lengthArray;
 }
 
-const float* readCSVFileVBO(const char* in, char seperator)
+const std::vector<float> readCSVFileVBO(const char* in, char seperator)
 {
     unsigned int lengthArray(getCellNumber(in, seperator));
 
     std::fstream fileIn(in,std::ios::in);
     unsigned int i = 0;
-    float* array= new float[lengthArray];
+    std::vector<float> array(lengthArray);
     const char* cvalue;
     std::string value;
     while( i<lengthArray){
@@ -80,14 +80,7 @@ void makeBinaryFileEBO(const char* in, char seperator,const char* out){
     std::fstream fileIn(in,std::ios::in);
     std::string value;
     const char* cvalue;
-    unsigned int lengthArray =0;
-    while(fileIn.good()){
-        if(fileIn.get()==seperator){
-            lengthArray++;
-        }
-    }
-    fileIn.clear();
-    fileIn.seekg(0,std::ios::beg);
+    unsigned int lengthArray(getCellNumber(in,seperator));
 
     unsigned int i = 0;
     unsigned int* array= new unsigned int[lengthArray];

@@ -77,13 +77,12 @@ Star::~Star()
 
 void Star::DrawPoints(int first, int count)
 {
-    mView = mCamera->View();
 
     glUseProgram(mPointsShader);
 
-    glUniformMatrix4fv(mPointsViewLoc,1,GL_FALSE,glm::value_ptr(mView));
+    glUniformMatrix4fv(mPointsViewLoc,1,GL_FALSE,glm::value_ptr(mCamera->View()));
     glUniformMatrix4fv(mPointsModelLoc,1,GL_FALSE,glm::value_ptr(mModel));
-    glUniformMatrix4fv(mPointsProjectionLoc,1,GL_FALSE,glm::value_ptr(mProjection));
+    glUniformMatrix4fv(mPointsProjectionLoc,1,GL_FALSE,glm::value_ptr(mCamera->Projection()));
 
     glBindVertexArray(mPointsAO);
 
